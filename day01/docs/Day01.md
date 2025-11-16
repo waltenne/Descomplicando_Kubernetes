@@ -291,6 +291,7 @@ O kube-proxy cuida do tráfego de rede dentro e fora do nó.
 - Implementa o load balancing interno dos Services    
 - Configura regras de iptables / eBPF    
 - Gerencia portas e acesso aos serviços dentro do cluster
+
 ## 🎬 3. Container Runtime (executa os containers)
 
 É o componente que roda os containers de verdade.
