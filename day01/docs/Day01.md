@@ -264,7 +264,7 @@ Eles fazem o trabalho pesado.
 O Worker Node é a máquina dentro do cluster Kubernetes onde os Pods e containers realmente rodam.  
 Para que isso aconteça, ele possui três componentes essenciais:
 
-## 🔧 1. Kubelet (agente do Kubernetes no nó)
+## 1. Kubelet (agente do Kubernetes no nó)
 
 É o principal agente do Worker Node.  
 Ele se comunica com o Control Plane e garante que tudo o que foi solicitado realmente está sendo executado no nó.
@@ -280,7 +280,7 @@ Ele se comunica com o Control Plane e garante que tudo o que foi solicitado real
 
 Sem o kubelet, o Worker não participa do cluster.
 
-## 🔌 2. Kube-proxy (gerencia rede dentro do nó)
+## 2. Kube-proxy (gerencia rede dentro do nó)
 
 O kube-proxy cuida do tráfego de rede dentro e fora do nó.
 
@@ -292,7 +292,7 @@ O kube-proxy cuida do tráfego de rede dentro e fora do nó.
 - Configura regras de iptables / eBPF    
 - Gerencia portas e acesso aos serviços dentro do cluster
 
-## 🎬 3. Container Runtime (executa os containers)
+## 3. Container Runtime (executa os containers)
 
 É o componente que roda os containers de verdade.
 
@@ -348,9 +348,9 @@ Com isso, o Worker Node pode executar aplicações dentro do cluster.
 O Kubernetes usa várias portas para permitir comunicação entre o Control Plane, os Workers, e os componentes internos como kubelet, kube-apiserver, etcd, kube-proxy, runtime, etc.
 
 Abaixo estão todas as portas oficiais, divididas por grupo.
-## 🧠 1. Portas do Control Plane
+## 1. Portas do Control Plane
 
-### 📌 kube-apiserver (API Server) — TCP
+### kube-apiserver (API Server) — TCP
 
 Portas obrigatórias:
 
@@ -359,7 +359,7 @@ Portas obrigatórias:
 |6443|TCP|Porta principal da API Kubernetes|
 |8080|TCP|API HTTP sem TLS (desativada na maioria das instalações modernas)|
 
-### 📌 etcd — banco de dados do Kubernetes — TCP
+### etcd — banco de dados do Kubernetes — TCP
 
 | Porta    | Protocolo | Função                                       |
 | -------- | --------- | -------------------------------------------- |
@@ -367,28 +367,28 @@ Portas obrigatórias:
 | 2380 | TCP       | Comunicação entre membros do cluster etcd    |
 |          |           |                                              |
 
-### 📌 kube-scheduler — TCP
+### kube-scheduler — TCP
 
 |Porta|Protocolo|Função|
 |---|---|---|
 |10259|TCP|Porta segura do kube-scheduler (TLS)|
 
-### 📌 kube-controller-manager — TCP
+### kube-controller-manager — TCP
 
 |Porta|Protocolo|Função|
 |---|---|---|
 |10257|TCP|Porta segura do controller-manager (TLS)|
 
-## ⚙️ 2. Portas dos Worker Nodes
+## 2. Portas dos Worker Nodes
 
-### 📌 kubelet — TCP
+### kubelet — TCP
 
 | Porta     | Protocolo | Função                                                          |
 | --------- | --------- | --------------------------------------------------------------- |
 | 10250 | TCP       | Porta principal do kubelet (API interna)                        |
 | 10255     | TCP       | Porta de leitura (desativada em versões recentes por segurança) |
 
-### 📌 kube-proxy — TCP/UDP
+### kube-proxy — TCP/UDP
 
 O kube-proxy usa portas dinâmicas, dependendo do modo (iptables, ipvs ou eBPF).  
 Porém, ele normalmente:
@@ -402,9 +402,9 @@ Porém, ele normalmente:
 |30000–32767|TCP/UDP|NodePorts usados para acessar Services externamente|
 
 
-## 🧩 3. Portas usadas pelo Cluster como um todo
+## 3. Portas usadas pelo Cluster como um todo
 
-### 📌 NodePort Range — TCP/UDP
+### NodePort Range — TCP/UDP
 
 Portas abertas em todos os Workers quando um Service usa NodePort:
 
@@ -412,7 +412,7 @@ Portas abertas em todos os Workers quando um Service usa NodePort:
 | --------------- | --------- | --------------------------- |
 | 30000–32767 | TCP/UDP   | Acesso externo aos Services |
 
-### 📌 CNI Plugins (rede)
+### CNI Plugins (rede)
 
 Dependem do plugin (Calico, Flannel, Cilium etc.). Exemplos:
 
@@ -437,7 +437,7 @@ Dependem do plugin (Calico, Flannel, Cilium etc.). Exemplos:
 |4240|TCP|
 |8472|UDP|
 
-## 🧠 4. Comunicação entre componentes (importante em firewalls)
+## 4. Comunicação entre componentes (importante em firewalls)
 
 ### Control Plane → Worker
 
@@ -590,7 +590,7 @@ Pense no Kubernetes como um grande condomínio:
 
 A instalação varia de acordo com o sistema operacional. Aqui estão as formas mais comuns (modo resumido e moderno):
 
- 🔵 Linux (qualquer distro)
+inux (qualquer distro)
 
 ```bash
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -604,9 +604,7 @@ Verificar versão:
 kubectl version --client
 ```
 
----
-
-🟣 Ubuntu/Debian (via apt)
+Ubuntu/Debian (via apt)
 
 ```bash
 sudo apt-get update
@@ -620,32 +618,26 @@ sudo apt-get update
 sudo apt-get install -y kubectl
 ```
 
----
-
- 🟦 Windows (via Chocolatey)
+Windows (via Chocolatey)
 
 ```powershell
 choco install kubernetes-cli
 ```
 
----
-
- 🟩 Windows (via Scoop)
+Windows (via Scoop)
 
 ```powershell
 scoop install kubectl
 ```
 
----
-
- 🟧 MacOS (via Homebrew)
+ MacOS (via Homebrew)
 
 ```bash
 brew install kubectl
 ```
 
 
-## 📌 Como testar se está funcionando
+## Como testar se está funcionando
 
 Depois de conectado a um cluster (ex.: kind, minikube, k3d, EKS, GKE etc.):
 
@@ -794,7 +786,7 @@ Agora que você já tem um cluster (ex.: Kind, Minikube, k3d ou cloud) e o kubec
 O kubectl é o seu controle remoto — tudo o que você quer que o cluster faça, você pede através dele.
 
 
-## 🧭 1. Verificando o estado do cluster
+## 1. Verificando o estado do cluster
 
 ### ✔ Listar os nodes
 
@@ -808,7 +800,7 @@ kubectl get nodes
 kubectl describe nodes
 ```
 
-## 🗂️ 2. Entendendo Namespaces
+## 2. Entendendo Namespaces
 
 Um Namespace é uma forma de organizar recursos dentro do cluster.  
 Eles servem para separar ambientes, isolar times, ou simplesmente organizar melhor os objetos.
@@ -848,7 +840,7 @@ kubectl config set-context --current --namespace=meu-ambiente
 Dica: se você não especificar um namespace, o kubectl usa o `default`.
 
 
-## 📦 3. Criando o seu primeiro Pod
+## 3. Criando o seu primeiro Pod
 
 Vamos criar um Pod simples rodando Nginx:
 
@@ -880,13 +872,13 @@ Entrar dentro do container:
 kubectl exec -it meu-pod -- bash
 ```
 
-## 🔄 4. Deletando um Pod
+## 4. Deletando um Pod
 
 ```bash
 kubectl delete pod meu-pod
 ```
 
-## 📁 5. Criando recursos via YAML
+## 5. Criando recursos via YAML
 
 Crie um arquivo `pod.yaml`:
 
@@ -919,7 +911,7 @@ Atualizar e reaplicar:
 kubectl apply -f pod.yaml
 ```
 
-## 🌐 6. Expondo o Pod com um Service
+## 6. Expondo o Pod com um Service
 
 ```bash
 kubectl expose pod meu-pod --port=80 --type=NodePort
@@ -931,7 +923,7 @@ Ver service:
 kubectl get svc
 ```
 
-## 🧹 7. Limpando recursos
+## 7. Limpando recursos
 
 ```bash
 kubectl delete -f pod.yaml
@@ -939,7 +931,7 @@ kubectl delete svc meu-pod
 ```
 
 
-## 🧠 Dicas importantes iniciantes
+## Dicas importantes iniciantes
 
 ### ✔ Documentação interna do Kubernetes (SUPER útil)
 
@@ -991,7 +983,7 @@ O YAML funciona como um “manual de instruções” que diz ao Kubernetes exata
 
 Já o comando dry-run permite testar a criação de recursos sem realmente criá-los, ajudando você a validar YAMLs e gerar arquivos de configuração automaticamente.
 
-## 📘 1. O que é YAML no Kubernetes?
+## 1. O que é YAML no Kubernetes?
 
 O YAML é um formato baseado em indentação que descreve objetos.  
 Ele segue sempre a mesma estrutura:
@@ -1030,7 +1022,7 @@ No nosso condomínio Kubernetes:
 - O Kubernetes lê esse projeto e constrói o que você pediu.    
 - Mudar o YAML = pedir uma reforma.
 
-## 📄 2. Criando YAMLs automaticamente com kubectl (dry-run)
+## 2. Criando YAMLs automaticamente com kubectl (dry-run)
 
 O kubectl pode gerar automaticamente arquivos YAML para você usando o dry-run, evitando que você tenha que escrever tudo do zero.
 
@@ -1053,7 +1045,7 @@ Agora você pode editar o arquivo e depois aplicar:
 ```bash
 kubectl apply -f pod.yaml
 ```
-## 🧪 3. O que é kubectl dry-run?
+## 3. O que é kubectl dry-run?
 
 O dry-run permite testar ações sem realmente executá-las.
 
@@ -1078,7 +1070,7 @@ kubectl apply -f pod.yaml --dry-run=server
 Se houver erro no YAML, ele avisa antes de você aplicar de verdade.
 
 
-## 🔧 4. Gerando YAMLs para outros recursos
+## 4. Gerando YAMLs para outros recursos
 
 ### ✔ Deployment
 
