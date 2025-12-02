@@ -1,3 +1,5 @@
+# Comandos
+
 kind create cluster --config kind-cluster.yml --name giropops
 
 kubectl run --image nginx --port 80 giropops
