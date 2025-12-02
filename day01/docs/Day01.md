@@ -106,7 +106,7 @@ _O objetivo é garantir que qualquer pedreiro (runtime) possa construir um quart
 > A OCI é responsável por definir os padrões oficiais que garantem que containers e imagens funcionem da mesma forma em qualquer ferramenta.  
 > Ela padroniza formatos e comportamentos, permitindo compatibilidade entre Docker, Podman, containerd, CRI-O e Kubernetes.
 
-# O que é Kubernets?
+# O que é Kubernetes?
 
 
 Kubernetes é uma plataforma de orquestração de containers responsável por gerenciar centenas ou milhares de containers de forma automática, eficiente e resiliente.
